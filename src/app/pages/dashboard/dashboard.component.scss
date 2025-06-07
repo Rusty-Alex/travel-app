@@ -1,0 +1,75 @@
+.dashboard{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &-welcome{
+        padding: 10px;
+        font-family: 'FiraCode';
+        font-size: var(--font-size-xl);
+        width: 500px;
+        height: 400px;
+        border: 1px solid var(--grey-dark);
+        background-color: var(--black-color);
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;        
+        gap: 50px;
+        color: var(--white-color); 
+        & span{
+            text-align: center;
+        }      
+    }
+}
+
+.closeApp{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white-color);
+    border-radius: 30px;
+    & img{
+        width: 50px;
+        height: 50px;
+    }
+
+    &:hover{
+        background-color: var(--primary-color);
+        box-shadow: 0px 0px 0px 2px var(--white-color);
+    }
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.first{
+    animation: starts 1.5s ease-in-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    font-size: var(--font-size-xl);
+}
+
+@keyframes starts {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+

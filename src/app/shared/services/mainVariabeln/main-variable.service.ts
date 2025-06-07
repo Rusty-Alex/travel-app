@@ -9,5 +9,9 @@ export class MainVariableService {
   public selbst!:any ;
   public plz!:any ;
   public ort!:any ; 
+  eingabe:string = "";
+  finalLand = false;
+  choiceLand = false;
+  choiceCity = false;
   constructor() { }
 }

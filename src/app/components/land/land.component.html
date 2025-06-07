@@ -1,0 +1,37 @@
+<section class="land">
+
+
+    <div class="land-content">
+        <div class="land-img" (mouseenter)="onIdee()" (mouseleave)="onLeave()"><img src="assets/img/idee.png" alt="">
+        </div>
+        <span>wähle bitte dein Land aus </span>
+        @if(searchLand){
+        <input type="text" [(ngModel)]="eingabe" (ngModelChange)="onInputChange($event)">
+        }
+
+        @if(selectLand){
+        <div class="land-select">
+            <div class="land-select-closeApp" (click)="closeSelect()"><img src="assets/img/closeApp.png" alt=""></div>
+            @for (item of filterLand; track $index; let i = $index) {
+            <div (click)="landSelect(item)" class="land-select-item">{{item}}</div>
+            }@empty {
+            <span>Keine Land gefunden</span>
+            }
+        </div>
+        }
+
+        @if(isHovered){
+        <div class="land-idee">
+            <span>Bitte schreiben sie das Land auf Englisch! in der Eingabe</span>            
+        </div>
+        }
+
+        @if(searchLand){
+            <button class="button-primary" [disabled]="!active()" (click)="next()">weiter</button>
+        }
+        
+    </div>
+
+
+
+</section>

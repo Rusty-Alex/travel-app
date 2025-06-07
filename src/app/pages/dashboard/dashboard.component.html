@@ -1,1 +1,29 @@
-<p>dashboard works!</p>
+<section class="dashboard">
+
+    <div class="closeApp" (click)="closeApp()"><img src="assets/img/closeApp.png" alt=""></div>
+    @if(welcome){
+    <div class="dashboard-welcome">
+        <span>Willkommen auf der Länder App</span>
+        <button class="button-primary" (click)="next()">Los geht's</button>
+    </div>
+    }
+
+    @if(firstCheck){
+    <div class="dashboard-welcome first">
+        <span>Wähle ein Land</span>
+        <div class="buttons">
+            <button class="button-primary" (click)="land()">Land wählen</button>            
+        </div>
+    </div>
+    }
+
+    @if(mainVariable.choiceLand){
+    <app-land></app-land>
+    }  
+
+    @if(mainVariable.finalLand){
+    <app-final-land></app-final-land>
+    }
+
+
+</section>

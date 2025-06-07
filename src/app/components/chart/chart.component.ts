@@ -22,7 +22,7 @@ import { FirestoreService } from '../../shared/services/firestore/firestore.serv
 export class ChartComponent {  
   
   public chartSeries: ApexNonAxisChartSeries = [];
-  public chartLabels: string[] = ['Assistenten', 'Selbstständige Erstellt'];
+  public chartLabels: string[] = ['Länder App', 'Wetter App'];
 
   constructor(public mainVariable: MainVariableService, public firestoreService: FirestoreService, private cdr: ChangeDetectorRef) {
 
@@ -44,7 +44,7 @@ export class ChartComponent {
 
   public chartDetails: ApexChart = {
     type: 'donut',
-    width: 350,
+    width: 290,
 
   };
 
@@ -75,6 +75,7 @@ export class ChartComponent {
     position: 'right',
     fontSize: '18px',
     offsetX: -50,
+    offsetY: 10,
     labels: {
       useSeriesColors: true
     },
