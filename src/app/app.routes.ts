@@ -5,7 +5,7 @@ import { DashboardSelfComponent } from './pages/dashboard-self/dashboard-self.co
 
 export const routes: Routes = [
     {
-        path: '', redirectTo: '/welcome', pathMatch: 'full'
+        path: '', redirectTo: 'welcome', pathMatch: 'full'
 
     },
 

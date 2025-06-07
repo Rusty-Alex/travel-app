@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class MainVariableService {
   ismobile = false;
-
+  public assistent!:any ;
+  public selbst!:any ;
+  public plz!:any ;
+  public ort!:any ; 
   constructor() { }
 }
