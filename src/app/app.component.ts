@@ -13,11 +13,6 @@ import { log } from 'console';
 })
 export class AppComponent { 
   constructor(public firestoreService: FirestoreService, public mainVariable: MainVariableService) {}
-  ngOnInit(): void {    
-    this.firestoreService.loadAssistent();
-    this.firestoreService.loadSelf();   
-    
-  }
 
 }
   

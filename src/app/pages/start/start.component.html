@@ -1,0 +1,14 @@
+<section class="start">
+    <div class="start-content">
+        @if(start){
+            <span>Loading...</span>
+            <span class="loading-img"><img src="assets/img/loading.png" alt=""></span>
+
+        }@else {
+        <span>Willkommen auf der Länder- und Wetter-App</span>
+        <button class="button-primary" (click)="next()">Los geht's</button>
+        }
+
+
+    </div>
+</section>
