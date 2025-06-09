@@ -23,7 +23,7 @@ export class LandComponent implements OnInit {
   }
   async loadData(): Promise<string[]> {
     const response = await fetch('https://countriesnow.space/api/v0.1/countries/iso');
-    const result = await response.json();
+    const result = await response.json();    
     if (result.error) {
       throw new Error('API-Fehler');
     }
@@ -65,11 +65,9 @@ export class LandComponent implements OnInit {
 }
 
 next(){
-  this.mainVariable.eingabe = this.eingabe;
-  console.log(this.mainVariable.eingabe);
+  this.mainVariable.eingabe = this.eingabe;  
   this.mainVariable.choiceLand = false;
-  this.mainVariable.finalLand = true;
-  
+  this.mainVariable.finalLand = true;  
   
 }
 

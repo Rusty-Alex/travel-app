@@ -1,13 +1,13 @@
-.final{
+.final {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation: starts2 1.5s ease-in-out;
 
-
-    &-content{
+    &-content {
         position: relative;
         width: 700px;
         height: 600px;
@@ -17,36 +17,91 @@
         display: flex;
         padding: 20px;
         flex-direction: column;
-       
+        overflow: auto;
+
         gap: 50px;
         color: var(--white-color);
     }
 
-    &-info{
+    &-info {
         width: 100%;
         height: 100%;
         display: flex;
-        flex-direction: column;        
+        flex-direction: column;
         gap: 25px;
     }
 }
 
-.flag-info{
-    display: flex;    
+.flag-info {
+    display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.flag{
+.flag {
     width: 50px;
     height: 50px
 }
 
-.btn{
-    position: absolute;
-    bottom: 20px;
+.btn {
+    position: sticky;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 200px;
     height: 50px
+}
+
+.loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+
+     &-content {
+        width: 200px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+    }
+
+    &-img{
+        width: 50px;
+        height: 50px;
+        background-color: var(--white-color);
+        border: 1px solid var(--grey-dark);
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: starts 2s ease-in-out infinite;
+        & img{
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+@keyframes starts {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes starts2 {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

@@ -1,20 +1,36 @@
 <section class="final">
 
     <div class="final-content">
-        <span> Alle wichtigen Informationen von {{finalLand[0]?.name['common']}}:</span>
-        <div class="final-info">
-            <span>Landesname: {{finalLand[0]?.name['common']}}</span>
-            <span>Landessprache: {{getLanguage()}}</span>
-            <span>Einwohner: {{finalLand[0]?.population}}</span>
-            <span>Region: {{finalLand[0]?.region}}</span>
-            <span>Abkürzung: {{finalLand[0]?.cca2}}</span>
-            <span>Auto Fahrseite: {{finalLand[0]?.car.side}}</span>
-            <span>Haupstadt: {{finalLand[0]?.capital[0]}}</span>
-            <span class="flag-info">Flage: <img class="flag" src="{{finalLand[0]?.flags.png}}" alt=""></span>
-            <span>Währung: {{getCurrency()}} {{getCurrencySymbol()}}</span>
-            <span>Kontinent: {{finalLand[0]?.continents[0]}}</span>
+        @if(loading){
+        <div class="loading">
+            <div class="loading-content">
+                <span>Loading...</span>
+                <span class="loading-img"><img src="assets/img/loading.png" alt=""></span>
+            </div>
         </div>
-        <button class="button-primary btn"  (click)="routesWelcome()">zur Startseite</button>
+        }@else {
+        @if(finalLand.length > 1){
+        <span>Es gibt mehre Länder zu deiner Eingabe: {{finalLand.length}}</span>
+        }
+        @for(item of finalLand; track $index; let i = $index) {
+        <span> Alle wichtigen Informationen von {{item?.name['common']}}:</span>
+        <div class="final-info">
+            <span>Landesname: {{item?.name['common']}}</span>
+            <span>Landessprache: {{getLanguage()}}</span>
+            <span>Einwohner: {{item?.population}}</span>
+            <span>Region: {{item?.region}}</span>
+            <span>Abkürzung: {{item?.cca2}}</span>
+            <span>Auto Fahrseite: {{item?.car.side}}</span>
+            <span>Haupstadt: {{item?.capital[0]}}</span>
+            <span class="flag-info">Flage: <img class="flag" src="{{item?.flags['png']}}" alt=""></span>
+            <span>Währung: {{getCurrency()}} {{getCurrencySymbol()}}</span>
+            <span>Kontinent: {{item?.continents[0]}}</span>
+        </div>
+        }
+
+        }
+
+        <button class="button-primary btn" (click)="routesWelcome()">zur Startseite</button>
     </div>
 
 

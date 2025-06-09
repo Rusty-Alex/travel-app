@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { MainVariableService } from '../../shared/services/mainVariabeln/main-variable.service';
-import { log } from 'console';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-final-land',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './final-land.component.html',
   styleUrl: './final-land.component.scss'
 })
 export class FinalLandComponent implements OnInit {
   finalLand: any[] = [];
+  loading = false;
   constructor(public mainVariable: MainVariableService, public router: Router) { }
 
   async ngOnInit(): Promise<void> {
-    this.finalLand = await this.loadData();
-    console.log(this.finalLand);
+    this.load();
 
   }
   async loadData(): Promise<string[]> {
@@ -43,7 +43,7 @@ export class FinalLandComponent implements OnInit {
   getCurrencySymbol(): string | null {
     const land = this.finalLand[0];
     const nativeNameObj = land?.currencies;
-    const fifaCode = nativeNameObj ? Object.keys(nativeNameObj)[0].toUpperCase() : 'deu';    
+    const fifaCode = nativeNameObj ? Object.keys(nativeNameObj)[0].toUpperCase() : 'deu';
     return land?.currencies[fifaCode]['symbol'];
   }
 
@@ -52,6 +52,12 @@ export class FinalLandComponent implements OnInit {
     this.mainVariable.choiceCity = false;
     this.mainVariable.finalLand = false;
     this.router.navigate(['/welcome']);
+  }
+
+  async load() {
+    this.loading = true;
+    this.finalLand = await this.loadData();
+    this.loading = false;    
   }
 
 }
