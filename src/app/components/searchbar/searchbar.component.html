@@ -1,0 +1,25 @@
+<section class="search">
+    <div class="search-content">
+
+        <div class="search-input">
+            <input type="text" placeholder="Suche mit Postleitzahl oder Stadtname" [(ngModel)]="eingabe"
+                (ngModelChange)="onInputChange($event)">
+                <button class="button-primary  btn" [disabled]="!active()" (click)="search()">Suchen</button>
+        </div>
+        @if(select){
+        <div class="search-icon">
+            @if(filterPlz.length > 0 ){
+            @for(item of filterPlz; track $index; let i = $index){
+            <span class="search-icon-item" (click)="plzSelect(item)">PLZ: {{item}}</span>
+            }
+            }@else if(filterCity.length > 0){
+            @for (item of filterCity; track $index; let i = $index) {
+            <span class="search-icon-item" (click)="ortSelect(item)">Stadt: {{item}}</span>
+            }
+            }
+        </div>
+        }
+
+
+    </div>
+</section>

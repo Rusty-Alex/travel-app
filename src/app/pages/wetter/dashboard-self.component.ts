@@ -1,17 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient} from '@angular/common/http';
+import { Component,} from '@angular/core';
 import { MainVariableService } from '../../shared/services/mainVariabeln/main-variable.service';
 import { FirestoreService } from '../../shared/services/firestore/firestore.service';
 import { Router } from '@angular/router';
+import { HeaderWetterComponent } from '../../components/header-wetter/header-wetter.component';
+import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
 
 
 @Component({
   selector: 'app-dashboard-self',
-  imports: [],
+  imports: [HeaderWetterComponent,SearchbarComponent],
   templateUrl: './dashboard-self.component.html',
   styleUrl: './dashboard-self.component.scss'
 })
-export class DashboardSelfComponent implements OnInit {
+export class DashboardSelfComponent {
 
   constructor(private http: HttpClient, public mainVariable: MainVariableService, public firestoreService: FirestoreService, public router: Router) { }
 
@@ -29,11 +31,10 @@ export class DashboardSelfComponent implements OnInit {
       const einzigartigeStädte = [...new Set(städte)];
       this.mainVariable.ort = einzigartigeStädte;      
     });
-
-    console.log(this.mainVariable.ort);
-    console.log(this.mainVariable.plz);
+   
     
     
   }
+
 
 }

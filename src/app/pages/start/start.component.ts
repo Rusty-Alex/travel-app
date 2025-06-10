@@ -10,8 +10,14 @@ import { Router } from '@angular/router';
   styleUrl: './start.component.scss'
 })
 export class StartComponent {
-  start: boolean = false;
+  start: boolean = false; 
+  startOn: boolean = false; 
   constructor(public firestoreService: FirestoreService, public router: Router) { }
+ngOnInit(): void {
+ 
+  
+}
+  
 async next(){
   this.start = true;
   this.firestoreService.loadAssistent();

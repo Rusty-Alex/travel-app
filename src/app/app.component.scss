@@ -1,0 +1,70 @@
+.start-app {
+    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.start-Animation-img {
+    width: 200px;
+    height: 200px;
+
+    & img {
+        width: 200px;
+        height: 200px;
+        animation: animation 2s linear infinite;
+        object-fit: cover;
+    }
+}
+
+.start-Animation {
+    width: 100%;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.start-Animation-text {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-xl);
+    color: var(--white-color);
+    text-align: center;
+
+}
+
+.animation-text {
+    width: 50ch;
+    animation: tippen 2s steps(15);
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+@keyframes tippen {
+    from {
+        width: 0;
+    }
+}
+
+
+@keyframes animation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media  (max-width: 1200px) {
+    
+    .start-Animation{
+        flex-direction: column;
+    }    
+}
