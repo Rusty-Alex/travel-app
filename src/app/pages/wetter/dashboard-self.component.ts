@@ -5,17 +5,22 @@ import { FirestoreService } from '../../shared/services/firestore/firestore.serv
 import { Router } from '@angular/router';
 import { HeaderWetterComponent } from '../../components/header-wetter/header-wetter.component';
 import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
+import { WeatherService } from '../../shared/services/weather/weather.service';
+import { CurrentlyWeatherComponent } from "../../components/currently-weather/currently-weather.component";
+import { ForcastWeatherComponent } from "../../components/forcast-weather/forcast-weather.component";
 
 
 @Component({
   selector: 'app-dashboard-self',
-  imports: [HeaderWetterComponent,SearchbarComponent],
+  imports: [HeaderWetterComponent, SearchbarComponent, CurrentlyWeatherComponent, ForcastWeatherComponent],
   templateUrl: './dashboard-self.component.html',
   styleUrl: './dashboard-self.component.scss'
 })
 export class DashboardSelfComponent {
 
-  constructor(private http: HttpClient, public mainVariable: MainVariableService, public firestoreService: FirestoreService, public router: Router) { }
+  constructor(private http: HttpClient, public mainVariable: MainVariableService, public firestoreService: FirestoreService, public router: Router,
+  public  wetter: WeatherService
+  ) { }
 
   ngOnInit(): void {
     this.http.get('assets/text/DE.txt', { responseType: 'text' }).subscribe(text => {
@@ -30,11 +35,9 @@ export class DashboardSelfComponent {
         .filter(Boolean);     
       const einzigartigeStädte = [...new Set(städte)];
       this.mainVariable.ort = einzigartigeStädte;      
-    });
-   
-    
-    
+    });        
   }
+
 
 
 }

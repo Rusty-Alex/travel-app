@@ -1,4 +1,21 @@
-<Section class="wetter">    
+<Section class="wetter">
     <app-header-wetter></app-header-wetter>
     <app-searchbar></app-searchbar>
+    <div class="wetter-content">
+
+        @if(mainVariable.loading){
+        <div class="loading-content">
+            <span>Loading...</span>
+            <span class="loading-img"><img src="assets/img/loading.png" alt=""></span>
+        </div>
+        }@else {
+            <div class="wetter-info">
+             <app-currently-weather></app-currently-weather>
+             <app-forcast-weather></app-forcast-weather>
+                
+            </div>
+
+        }
+
+    </div>
 </Section>
