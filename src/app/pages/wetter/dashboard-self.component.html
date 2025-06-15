@@ -9,13 +9,19 @@
             <span class="loading-img"><img src="assets/img/loading.png" alt=""></span>
         </div>
         }@else {
-            <div class="wetter-info">
-             <app-currently-weather></app-currently-weather>
-             <app-forcast-weather></app-forcast-weather>
-                
-            </div>
-
+        @if(mainVariable.wetterPlz != null || mainVariable.wetterOrt != null){
+        <div class="wetter-info">
+            <app-currently-weather></app-currently-weather>
+            <app-forcast-weather></app-forcast-weather>
+        </div>
+         <div class="wetter-buttons">
+            <button class="button-primary" (click)="goStart()">Startseite</button>
+            <button class="button-primary" (click)="goSearch()">Neue Suche starten</button>
+        </div>
         }
+        }
+
+       
 
     </div>
 </Section>

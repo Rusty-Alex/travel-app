@@ -38,6 +38,26 @@ export class DashboardSelfComponent {
     });        
   }
 
+goStart(){
+this.clear()
+this.router.navigate(['/welcome']);
+}
 
+clear(){
+  this.mainVariable.eingabe = '';
+  this.mainVariable.wetterPlz = null;
+  this.mainVariable.wetterOrt = null;
+  this.mainVariable.tageForecastPlz = [];
+  this.mainVariable.tageForecastOrt = [];
+  this.mainVariable.inputPlz = '';
+  this.mainVariable.plzOnly = false;
+  this.mainVariable.ortOnly = false;  
+}
+
+goSearch(){
+  this.clear()
+
+  
+}
 
 }

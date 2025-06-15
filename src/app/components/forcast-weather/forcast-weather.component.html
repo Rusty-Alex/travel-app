@@ -1,1 +1,55 @@
-<p>forcast-weather works!</p>
+<Section class="forcast">
+    <span>Wetter für die nächsten Tage:</span>
+    @if(mainVariable.plzOnly ){
+    <div class="forcast-main">
+        <div class="forcast-content">
+            <span>Wetter heute:</span>
+            <div class="forcast-wetter">
+                <span> {{mainVariable.tageForecastPlz[0]['main']['temp']}} °C</span>
+                <span> <img [src]="iconUrl(mainVariable.tageForecastPlz[0]['weather'][0]['icon'])" alt=""></span>
+            </div>
+        </div>
+        <div class="forcast-content">
+            <span>Wetter morgen:</span>
+            <div class="forcast-wetter">
+                <span> {{mainVariable.tageForecastPlz[1]['main']['temp']}} °C</span>
+                <span> <img [src]="iconUrl(mainVariable.tageForecastPlz[1]['weather'][0]['icon'])" alt=""></span>
+            </div>
+        </div>
+        <div class="forcast-content">
+            <span>Wetter übermorgen:</span>
+            <div class="forcast-wetter">
+                <span> {{mainVariable.tageForecastPlz[2]['main']['temp']}} °C</span>
+                <span> <img [src]="iconUrl(mainVariable.tageForecastPlz[2]['weather'][0]['icon'])" alt=""></span>
+            </div>
+        </div>
+    </div>
+    }
+    @if (mainVariable.ortOnly) {
+    <div class="forcast-main">
+        <div class="forcast-content">
+            <span>Wetter heute:</span>
+            <div class="forcast-wetter">
+                <span> {{mainVariable.tageForecastOrt[0]['main']['temp']}} °C</span>
+                <span> <img [src]="iconUrl(mainVariable.tageForecastOrt[0]['weather'][0]['icon'])" alt=""></span>
+            </div>
+        </div>
+        <div class="forcast-content">
+            <span>Wetter morgen:</span>
+            <div class="forcast-wetter">
+                <span> {{mainVariable.tageForecastOrt[1]['main']['temp']}} °C</span>
+                <span> <img [src]="iconUrl(mainVariable.tageForecastOrt[1]['weather'][0]['icon'])" alt=""></span>
+            </div>
+        </div>
+        <div class="forcast-content">
+            <span>Wetter übermorgen:</span>
+            <div class="forcast-wetter">
+                <span> {{mainVariable.tageForecastOrt[2]['main']['temp']}} °C</span>
+                <span> <img [src]="iconUrl(mainVariable.tageForecastOrt[2]['weather'][0]['icon'])" alt=""></span>
+            </div>
+        </div>
+    </div>
+}
+
+
+</Section>

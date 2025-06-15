@@ -14,9 +14,12 @@ export class MainVariableService {
   choiceLand = false;
   choiceCity = false;
   loading = false;
+  inputPlz: string = '';
   wetterPlz: any| null;
   wetterOrt: any| null;
   tageForecastPlz: any[] = [];
   tageForecastOrt: any[] = [];
+  ortOnly: boolean = false;
+  plzOnly: boolean = false;
   constructor() { }
 }

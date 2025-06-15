@@ -1,1 +1,20 @@
-<p>currently-weather works!</p>
+<section class="currently">
+
+    <div><span>Aktuelle Wetterdaten:</span></div>
+    <div class="currently-content">
+        @if(mainVariable.wetterPlz != null){
+        <span>Das ist das Wetter mit der PLZ: {{mainVariable.inputPlz}}</span>
+        <div class="currently-wetter">
+            <span>{{mainVariable.wetterPlz.main['temp']}} °C</span>
+            <span><img [src]="iconUrl(mainVariable.wetterPlz.weather[0].icon)" alt=""></span>
+        </div>        
+        }@else if (mainVariable.wetterOrt != null) {
+        <span>Das ist das Wetter in: {{mainVariable.wetterOrt.name}}</span>
+        <div class="currently-wetter">
+            <span>{{mainVariable.wetterOrt.main['temp']}} °C</span>
+            <span><img [src]="iconUrl(mainVariable.wetterOrt.weather[0].icon)" alt=""></span>
+        </div>        
+        }
+    </div>
+
+</section>

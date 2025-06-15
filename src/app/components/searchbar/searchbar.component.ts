@@ -14,76 +14,71 @@ import { firstValueFrom } from 'rxjs';
 export class SearchbarComponent {
   eingabe = "";
   filterPlz: any[] = [];
-  filterCity: any[] = [];  
+  filterCity: any[] = [];
   select = false;
   aktuellesWetter: any = null;
-  forecast3Tage: any[] = [];  
+  forecast3Tage: any[] = [];
   fehler = '';
 
-  constructor(public mainVariable: MainVariableService, public  wetter: WeatherService) { }
+  constructor(public mainVariable: MainVariableService, public wetter: WeatherService) { }
 
- onInputChange(value: string): void {
-  if (value.length < 3) {
-    this.filterPlz = [];
-    this.filterCity = [];
-    this.select = false;    
-    return;
+  onInputChange(value: string): void {
+    if (value.length < 3) {
+      this.filterPlz = [];
+      this.filterCity = [];
+      this.select = false;
+      return;
+    }
+
+    if (/^[0-9]+$/.test(value)) {
+      this.filterPlz = this.mainVariable.plz
+        ?.filter((plz: any) => plz && String(plz).includes(value)) || [];
+      this.filterPlz = [...new Set(this.filterPlz)];
+      this.select = true;
+    } else if (/^[a-zA-ZäöüÄÖÜß0-9.\-&\s]+$/.test(value)) {
+      this.filterCity = this.mainVariable.ort.filter((ort: any) => ort.toLowerCase().includes(value.toLowerCase()));
+      this.select = true;
+    } else {
+      alert('Es darf nur Zahlen oder Buchstaben eingegeben werden!');
+      this.select = true;
+    }
   }
 
-  if (/^[0-9]+$/.test(value)) {    
-  this.filterPlz = this.mainVariable.plz
-    ?.filter((plz: any) => plz && String(plz).includes(value)) || [];    
-    this.filterPlz = [...new Set(this.filterPlz)];
-    this.select = true;    
-  } else if (/^[a-zA-ZäöüÄÖÜß0-9.\-&\s]+$/.test(value)) {
-    this.filterCity = this.mainVariable.ort.filter((ort: any) => ort.toLowerCase().includes(value.toLowerCase()));
-    this.select = true;     
-  } else {
-    alert('Es darf nur Zahlen oder Buchstaben eingegeben werden!');
-    this.select = true; 
+  plzSelect(item: string) {
+    this.eingabe = item;
+    this.select = false;
   }
-}
 
-plzSelect(item:string) {
-  this.eingabe = item;
-  this.select = false;
-}
+  ortSelect(item: string) {
+    this.eingabe = item;
+    this.select = false;
+  }
 
-ortSelect(item:string) { 
-this.eingabe = item;
-this.select = false;
-}
+  active() {
+    return this.eingabe && this.eingabe.length > 3;
 
-active() {
-  return this.eingabe && this.eingabe.length > 3;
+  }
 
-}
+  async search() {
 
-async search() {
- 
-  
-   if (!this.eingabe) return;
-  this.mainVariable.loading = true;
-    this.fehler = '';
-    this.aktuellesWetter = null;
-    this.forecast3Tage = [];
-
+    if (!this.eingabe) return;
+    this.clear(); 
 
     try {
       if (/^\d+$/.test(this.eingabe)) {
-        // Suche per PLZ
         const coords = await this.wetter.getCoordsByPlz(this.eingabe).toPromise();
         this.aktuellesWetter = await this.wetter.getCurrentWeatherByPlz(this.eingabe).toPromise();
-        this.mainVariable.wetterPlz = this.aktuellesWetter;       
+        this.mainVariable.wetterPlz = this.aktuellesWetter;
         const forecast = await this.wetter.get3DayForecastByCoords(coords.lat, coords.lon).toPromise();
         this.forecast3Tage = this.filter3TageForecast(forecast);
         this.mainVariable.tageForecastPlz = this.forecast3Tage;
+        this.mainVariable.plzOnly = true;
         console.log(this.mainVariable.wetterPlz);
         console.log(this.mainVariable.tageForecastPlz);
-        
-        
+
+
+
       } else {
-        // Suche per Stadtname
         this.aktuellesWetter = await this.wetter.getCurrentWeatherByCity(this.eingabe).toPromise();
         this.mainVariable.wetterOrt = this.aktuellesWetter;
         const lat = this.aktuellesWetter.coord.lat;
@@ -91,24 +86,37 @@ async search() {
         const forecast = await this.wetter.get3DayForecastByCoords(lat, lon).toPromise();
         this.forecast3Tage = this.filter3TageForecast(forecast);
         this.mainVariable.tageForecastOrt = this.forecast3Tage;
-        console.log(this.mainVariable.wetterOrt.weather[0].icon);
+        this.mainVariable.ortOnly = true;
+        console.log(this.mainVariable.wetterOrt);
         console.log(this.mainVariable.tageForecastOrt);
       }
     } catch (e) {
       this.fehler = 'Wetter konnte nicht geladen werden.';
-      console.error(e);
+      alert(this.fehler);
     } finally {
+      this.eingabe = '';
       this.mainVariable.loading = false;
     }
-}  
-filter3TageForecast(forecastData: any): any[] {
+  }
+  filter3TageForecast(forecastData: any): any[] {
     if (!forecastData?.list) return [];
     return forecastData.list
       .filter((eintrag: any) => eintrag.dt_txt.includes('12:00:00'))
       .slice(0, 3);
   }
 
-  
+  clear() {
+    this.mainVariable.loading = true;
+    this.fehler = '';
+    this.aktuellesWetter = null;
+    this.forecast3Tage = [];
+    this.mainVariable.wetterPlz = null;
+    this.mainVariable.wetterOrt = null;
+    this.mainVariable.tageForecastPlz = [];
+    this.mainVariable.tageForecastOrt = [];
+    this.mainVariable.inputPlz = this.eingabe;
+    this.mainVariable.plzOnly = false;
+    this.mainVariable.ortOnly = false;
 
-
+  }
 }
