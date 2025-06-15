@@ -1,0 +1,9 @@
+{
+  "routes": {
+    "/travel-app": {},
+    "/travel-app/dashboard": {},
+    "/travel-app/dashboard-self": {},
+    "/travel-app/start": {},
+    "/travel-app/welcome": {}
+  }
+}
